@@ -40,27 +40,17 @@ class OfferController extends Controller
      */
     public function store( Request $request)
     {
-        $input=$request->all();
-        $images=array();
-        if($files=$request->file('images')){
-            foreach($files as $file){
-                $name=$file->getClientOriginalName();
-                $file->move('image',$name);
-                $images[]=$name;
-            }
-        }
+
+        $images = $request->file('images')->store('public/images/offersImages');
 
 
         Offer::create([
             'description' => $request->description,
             'daysToEnd' => $request->daysToEnd,
             'store_id' =>$request->store_id,
+            'images' =>$images
         ]);
-        Offer::insert( [
-            'images'=>  implode("|",$images),
 
-
-        ]);
 
         return to_route('offer.index');
     }
