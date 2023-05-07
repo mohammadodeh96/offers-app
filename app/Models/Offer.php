@@ -10,7 +10,7 @@ class Offer extends Model
     use HasFactory;
 
 
-    protected $fillable = ['description', 'store_id','daysToEnd'];
+    protected $fillable = ['description', 'store_id','daysToEnd','images'];
 
     public function store()
     {
